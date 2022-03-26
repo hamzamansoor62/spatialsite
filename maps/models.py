@@ -1,0 +1,55 @@
+from xml.etree.ElementTree import Comment
+from django.db import models
+
+# Create your models here.
+class Data(models.Model):
+    ogc_fid = models.BigAutoField(primary_key=True)
+    wkb_geometry = models.CharField(max_length=250, blank=True, null=True)
+    scalerank = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    featurecla = models.CharField(max_length=32, blank=True, null=True)
+    name = models.CharField(max_length=254, blank=True, null=True)
+    elevation = models.DecimalField(max_digits=25, decimal_places=9, blank=True, null=True)
+    comment = models.CharField(max_length=50, blank=True, null=True)
+    name_alt = models.CharField(max_length=254, blank=True, null=True)
+    lat_y = models.DecimalField(max_digits=25, decimal_places=9, blank=True, null=True)
+    long_x = models.DecimalField(max_digits=25, decimal_places=9, blank=True, null=True)
+    nation1 = models.CharField(max_length=20, blank=True, null=True)
+    nation2 = models.CharField(max_length=20, blank=True, null=True)
+    note = models.CharField(max_length=50, blank=True, null=True)
+    region = models.CharField(max_length=50, blank=True, null=True)
+    subregion = models.CharField(max_length=50, blank=True, null=True)
+    min_zoom = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
+    label = models.CharField(max_length=254, blank=True, null=True)
+    wikidataid = models.CharField(max_length=254, blank=True, null=True)
+    name_ar = models.CharField(max_length=254, blank=True, null=True)
+    name_bn = models.CharField(max_length=254, blank=True, null=True)
+    name_de = models.CharField(max_length=254, blank=True, null=True)
+    name_en = models.CharField(max_length=254, blank=True, null=True)
+    name_es = models.CharField(max_length=254, blank=True, null=True)
+    name_fr = models.CharField(max_length=254, blank=True, null=True)
+    name_el = models.CharField(max_length=254, blank=True, null=True)
+    name_hi = models.CharField(max_length=254, blank=True, null=True)
+    name_hu = models.CharField(max_length=254, blank=True, null=True)
+    name_id = models.CharField(max_length=254, blank=True, null=True)
+    name_it = models.CharField(max_length=254, blank=True, null=True)
+    name_ja = models.CharField(max_length=254, blank=True, null=True)
+    name_ko = models.CharField(max_length=254, blank=True, null=True)
+    name_nl = models.CharField(max_length=254, blank=True, null=True)
+    name_pl = models.CharField(max_length=254, blank=True, null=True)
+    name_pt = models.CharField(max_length=254, blank=True, null=True)
+    name_ru = models.CharField(max_length=254, blank=True, null=True)
+    name_sv = models.CharField(max_length=254, blank=True, null=True)
+    name_tr = models.CharField(max_length=254, blank=True, null=True)
+    name_vi = models.CharField(max_length=254, blank=True, null=True)
+    name_zh = models.CharField(max_length=254, blank=True, null=True)
+    ne_id = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    name_fa = models.CharField(max_length=80, blank=True, null=True)
+    name_he = models.CharField(max_length=80, blank=True, null=True)
+    name_uk = models.CharField(max_length=80, blank=True, null=True)
+    name_ur = models.CharField(max_length=80, blank=True, null=True)
+    name_zht = models.CharField(max_length=80, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'data'
+        

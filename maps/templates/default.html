@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Geo Spatial Data</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 155px;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <style type="text/css">
+      #info {
+        display: table;
+        position: relative;
+        margin: 0px auto;
+        top: 155px;
+        word-wrap: anywhere;
+        white-space: pre-wrap;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        font-size: 12px;
+        text-align: center;
+        color: #222;
+        background: #fff;
+      }
+	  #button {
+		line-height: 12px;
+		width: 180px;
+		font-size: 8pt;
+		font-family: tahoma;
+		margin-top: 1px;
+		margin-right: 2px;
+		position:absolute;
+		top:0;
+		right:0;
+	}
+    </style>
+    <div id="map"></div>
+    <pre id="info"></pre>
+	<!-- Adding location names and elevations extracted from shape file -->
+	<h4>(Location : Respective Elevation)</h4>
+	<div id='text'>
+		<table>
+			{% for each in geodata %}
+			<td>
+				<tr>&ensp;(</tr>
+				<tr>{{ each.name }}&ensp;</tr>
+				<tr>{{ each.elevation }}&ensp;</tr>
+				<tr>)&ensp;</tr>
+			</td>
+			{% endfor  %}
+		</table>
+	</div> 
+	<!-- Adding button to access api -->
+	<button id="button" onclick="location.href = '/api/'">API</button>
+    <script>
+		// Map View
+      mapboxgl.accessToken = 'pk.eyJ1IjoiaGFtemEzMTMxIiwiYSI6ImNsMHYyeWpxYjB1MXQzZW5wM2hndGMyZ2oifQ.-JQqmI3NdfHKs36GPjg3rg';
+      const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [74.3000763, 31.479624],
+        zoom: 1
+      });
+	//   Adding markers on map
+      map.on('load', () => {
+        map.loadImage('https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+          (error, image) => {
+            if (error) throw error;
+            map.addImage('custom-marker', image);
+            map.addSource('points', {
+              'type': 'geojson',
+              'data': {
+                'type': 'FeatureCollection',
+                'features': [{
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [86.880625847, 27.980475165]
+                  },
+                  'properties': {
+                    'title': 'Mapbox DC'
+                  }
+                }, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [37.353282097, -3.075738214]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-85.633717414, -78.529351495]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [89.340098504, 42.768683173]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [35.474742058, 31.515387274]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [71.097788933, 34.098395087]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [76.513194207, 35.882391669]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [87.413218621, 36.416510321]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [81.312510613, 31.066595770]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [49.009532097, 44.257574774]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [42.439219597, 43.355169989]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-116.828236457, 36.242254950]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-151.007313606, 63.069403387]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-118.292225715, 36.582709052]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [137.284434441, -28.448663019]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [148.263194207, -36.455865167]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-70.015797493, -32.655694269]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-63.968800422, -42.623955988]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+				}, {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-66.375599739, 5.451666571]
+                  },
+                  'properties': {
+                    'title': 'Mapbox SF'
+                  }
+                }]
+              }
+            });
+            map.addLayer({
+              'id': 'points',
+              'type': 'symbol',
+              'source': 'points',
+              'layout': {
+                'icon-image': 'custom-marker',
+                'text-field': ['get', 'title'],
+                'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                'text-offset': [0, 1.25],
+                'text-anchor': 'top'
+              }
+            });
+          });
+      });
+	//   Click to get coordinates
+      map.on('click', (e) => {
+        document.getElementById('info').innerHTML = JSON.stringify(e.point) + '' + JSON.stringify(e.lngLat.wrap());
+		console.log(e.lngLat)
+      });
+    </script>
+  </body>
+</html>
